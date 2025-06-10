@@ -1,44 +1,77 @@
-import React from 'react';
-import NewProduct from './components/NewProduct';
+import logo from './logo.svg';
+import './App.css';
+import { Link,NavLink ,Route, Routes } from 'react-router-dom';
+import Home from './components/Home';
+import About from './components/About';
+import NotFound from './components/NotFound';
+import Support from './components/Support';
+import Labs from './components/Labs';
+import MainHeader from './components/MainHeader';
+import { Outlet } from 'react-router-dom';
 
-import Products from './components/Products';
-
-const App = () => {
-  const products = [
-    {
-      id: 'p1',
-      title: 'Nirma',
-      amount: 100,
-      date: new Date(2021, 8, 10),
-    },
-    { 
-      id: 'p2', 
-      title: 'Sirf Excel', 
-      amount: 200, 
-      date: new Date(2021, 2, 2) },
-    {
-      id: 'p3',
-      title: 'Tide',
-      amount: 130,
-      date: new Date(2021, 12, 28),
-    },
-    {
-      id: 'p4',
-      title: 'Maggi',
-      amount: 450,
-      date: new Date(2021, 5, 5),
-    },
-  ];
-
-  function printProductData(data) {
-    console.log("i am inside APP.js")
-    console.log(data)
-  }
-
+function App() {
   return (
-    <div>
-      <NewProduct pranay = {printProductData} />
-      <Products items={products} />
+    <div className="App">
+
+{/* ui pr button show thase  */}
+      {/* <nav>
+        <ul>
+          <li>
+            <NavLink to="/">Home</NavLink>
+          </li>
+          <li>
+              <Link to="/About">About</Link>
+          </li>
+          <li>NotFound</li>
+          <li>
+            <Link to="/support">support</Link>
+          </li>
+          <li>
+            <Link to="/labs">labs</Link>
+          </li>
+        </ul>
+      </nav> */}
+
+     <nav>
+        <ul>
+          <li>
+            <NavLink to="/">Home</NavLink>
+          </li>
+          <li>
+              <NavLink to="/About">About</NavLink>
+          </li>
+          <li>NotFound</li>
+          <li>
+            <NavLink to="/support">support</NavLink>
+          </li>
+          <li>
+            <NavLink to="/labs">labs</NavLink>
+          </li>
+        </ul>
+      </nav>
+
+
+
+
+
+
+
+
+
+
+      <Routes>
+      {/* home parent che and baki aena child */}
+        <Route path='/' element={<MainHeader/>}>
+        {/* home page text  show krva mate main header ma outlet nakhine new route create krine home componet ma text krine rendwer kri skay  */}
+        <Route index element={<Home/>}/>
+          <Route path='/support' element={<Support/>}/>
+          <Route path='/About' element={<About/>}/>
+          <Route path='/labs' element={<Labs/>}/>
+        </Route>
+
+        {/* if koi page ama thi found nai thatu to */}
+        <Route path='*' element={<NotFound/>}/>
+      </Routes>
     </div>
   );
 }
